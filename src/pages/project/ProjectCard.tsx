@@ -2,13 +2,17 @@ import type { Project } from "../../types/Project";
 
 const sty = {
 	container: "aspect-[5/2] p-4 border border-neutral-200 rounded-2xl shadow-sm flex flex-col gap-6",
+
 	image: "aspect-video object-cover border border-neutral-200 rounded-lg",
+
 	detailsWrap: "flex flex-col gap-3",
-	title: "text-xl text-gray-950",
-	techWrap: "flex flex-wrap gap-2",
+	title: "font-semibold text-xl text-gray-800",
 	desc: "truncate text-sm text-gray-600",
+
+	techWrap: "flex flex-wrap gap-2",
 	tech: "px-2 rounded-sm bg-neutral-200 text-sm text-gray-700",
-	linkWrap: "flex flex-wrap gap-2",
+
+	linkWrap: "flex flex-wrap gap-4",
 	link: "text-sky-600 hover:underline"
 };
 

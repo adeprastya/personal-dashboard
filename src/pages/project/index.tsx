@@ -4,16 +4,28 @@ import useFetch from "../../hooks/useFetch";
 import type { Project } from "../../types/Project";
 import { Fragment } from "react";
 
+const sty = {
+	container: "w-full p-8 flex flex-col gap-8",
+
+	h1: "font-semibold tracking-wide text-3xl",
+
+	cardWrap: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+};
+
 export default function Project() {
 	const { data, error, loading } = useFetch<{ data: Array<Project> }>("GET", "/projects");
 
 	return (
-		<section className="p-8 flex flex-col gap-8">
-			<h1 className="text-3xl">Project</h1>
+		<section className={sty.container}>
+			<h1 className={sty.h1}>Project</h1>
 
 			<ProjectForm />
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+			{loading && <p>Loading...</p>}
+
+			{error && <p>{error.message}</p>}
+
+			<div className={sty.cardWrap}>
 				{Array.isArray(data?.data) &&
 					data?.data.map((project) => {
 						return (
@@ -26,10 +38,6 @@ export default function Project() {
 						);
 					})}
 			</div>
-
-			{error && <p>{error.message}</p>}
-
-			{loading && <p>Loading...</p>}
 		</section>
 	);
 }
