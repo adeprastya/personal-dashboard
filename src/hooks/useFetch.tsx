@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import type { AxiosError, AxiosRequestConfig } from "axios";
 
-function useFetch<T = unknown>(
-	method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" = "GET",
-	url: string,
+export default function useFetch<T = unknown>(
+	method: AxiosRequestConfig["method"] = "GET",
+	url: AxiosRequestConfig["url"],
 	options: AxiosRequestConfig = {}
 ) {
 	const [data, setData] = useState<T | null>(null);
@@ -12,7 +12,7 @@ function useFetch<T = unknown>(
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		console.log("!! USE FETCH RUNNING");
+		console.log("__Use Fetch Running");
 
 		const fetch = async () => {
 			setLoading(true);
@@ -37,4 +37,27 @@ function useFetch<T = unknown>(
 	return { data, error, loading };
 }
 
-export default useFetch;
+export const axiosFetch = async (
+	method: AxiosRequestConfig["method"],
+	url: AxiosRequestConfig["url"],
+	options: AxiosRequestConfig = {}
+) => {
+	const result = {
+		result: null as unknown,
+		error: null as AxiosError | null
+	};
+
+	try {
+		console.log("__axiosFetch Running...");
+
+		const res = await axios({
+			method,
+			url: import.meta.env.VITE_API_URL + url,
+			...options
+		});
+		result.result = res.data;
+	} catch (err) {
+		result.error = err as AxiosError;
+	}
+	return result;
+};

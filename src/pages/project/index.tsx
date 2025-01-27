@@ -1,11 +1,10 @@
+import type { Project } from "../../types/Project";
 import ProjectForm from "./ProjectForm";
 import ProjectCard from "./ProjectCard";
 import useFetch from "../../hooks/useFetch";
-import type { Project } from "../../types/Project";
-import { Fragment } from "react";
 
 const sty = {
-	container: "w-full p-8 flex flex-col gap-8",
+	container: "w-full min-h-dvh p-8 flex flex-col gap-8",
 
 	h1: "font-semibold tracking-wide text-3xl",
 
@@ -28,14 +27,7 @@ export default function Project() {
 			<div className={sty.cardWrap}>
 				{Array.isArray(data?.data) &&
 					data?.data.map((project) => {
-						return (
-							<Fragment key={project.id}>
-								<ProjectCard project={project} />
-								<ProjectCard project={project} />
-								<ProjectCard project={project} />
-								<ProjectCard project={project} />
-							</Fragment>
-						);
+						return <ProjectCard key={project.id} project={project} />;
 					})}
 			</div>
 		</section>

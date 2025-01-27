@@ -28,7 +28,7 @@ export default function InputField({
 					onChange={onChange}
 					className={`peer px-3 ${className}`}
 					{...props}
-				/>
+				></input>
 			) : (
 				<textarea
 					id={name}
